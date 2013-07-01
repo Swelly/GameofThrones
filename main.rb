@@ -18,20 +18,27 @@ get '/' do
 end
 
 get '/houses' do
-  run_sql
   sql = "SELECT * FROM houses"
   @houses = run_sql(sql)
   erb :houses
 end
 
 get '/people' do
+  sql = "SELECT * FROM gotpeople"
+  @people = run_sql(sql)
   erb :people
 end
 
 get '/people/:id' do
+  id = params[:id]
+  sql = "SELECT * from gotpeople WHERE id = #{id}"
+  @person = run_sql(sql).first
   erb :person
 end
 
 get '/houses/:id' do
+  id = params[:id]
+  sql = "SELECT * from houses WHERE id = #{id}"
+  @house = run_sql(sql).first
   erb :house
 end
