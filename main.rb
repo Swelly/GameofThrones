@@ -5,6 +5,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 
 helpers do
+  # This helps us run SQL commands
   def run_sql(sql)
     db = PG.connect(:dbname => 'westeros', :host => 'localhost')
     result = db.exec(sql)
@@ -21,6 +22,25 @@ get '/houses' do
   sql = "SELECT * FROM houses"
   @houses = run_sql(sql)
   erb :houses
+end
+
+get '/houses/new' do
+  erb :new_house
+end
+
+post '/houses' do
+
+  name = params[:name]
+  sigil = params[:sigil]
+  motto = params[:motto]
+
+  sql = "INSERT INTO houses (name, sigil, motto) VALUES ('#{name}', '#{sigil}', '#{motto}')"
+  run_sql(sql)
+
+  redirect to('/houses')
+end
+
+get '/people/new' do
 end
 
 get '/people' do
