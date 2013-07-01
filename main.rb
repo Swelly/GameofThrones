@@ -47,7 +47,7 @@ end
 
 #People / Characters
 get '/people' do
-  sql = "SELECT * FROM people"
+  sql = "SELECT * FROM gotpeople"
   @people = run_sql(sql)
   erb :people
 end
@@ -67,7 +67,7 @@ post '/people/new' do
   image = params[:image]
   house_id = params[:house_id]
 
-  sql = "INSERT INTO people (name, weapon, age, image, house_id) VALUES ('#{name}', '#{weapon}', #{age}, '#{image}', #{house_id})"
+  sql = "INSERT INTO gotpeople (name, weapon, age, image, house_id) VALUES ('#{name}', '#{weapon}', #{age}, '#{image}', #{house_id})"
 
   run_sql(sql)
   redirect to '/people'
@@ -75,7 +75,7 @@ end
 
 get '/people/:id' do
   id = params[:id]
-  sql = "SELECT * FROM people WHERE id = #{id}"
+  sql = "SELECT * FROM gotpeople WHERE id = #{id}"
   @person = run_sql(sql).first
   erb :person
 end
