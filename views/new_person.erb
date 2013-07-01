@@ -1,0 +1,18 @@
+<h1> Add Character </h1>
+<form action="/people/new" method="post">
+  <input type="text" name="name" placeholder="Name" autofocus>
+  <input type="text" name="weapon" placeholder="Weapon">
+  <input type="int" name="age" placeholder="Age">
+  <input type="text" name="image" placeholder="Image URL">
+
+  House:
+  <select name="house_id">
+    <% @houses.each do |house| %>
+      <option value= "<%= house['id'] %>">
+        <%= house['name'] %>
+      </option>
+    <% end %>
+  </select>
+
+  <button>Add Character</button>
+</form>
