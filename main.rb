@@ -7,7 +7,7 @@ require 'sinatra/reloader' if development?
 helpers do
   # This helps us run SQL commands
   def run_sql(sql)
-    db = PG.connect(dbname: 'westeros', host: 'localhost')
+    db = PG.connect(:dbname => 'westeros', :host => 'localhost')
     result = db.exec(sql)
     db.close
     result
